@@ -2,6 +2,26 @@
 
 This project provides a BIDS-based probabilistic tractography workflow using reusable shell/Python scripts and small YAML pipeline files. The repository is organised so preprocessing can be run once, quality-controlled in stages, and tract-specific analyses can be run independently afterwards.
 
+## Example command sequence
+
+```bash
+scripts/run_pipeline.sh --pipeline pipelines/preprocessing_T1.yaml
+scripts/run_pipeline.sh --pipeline pipelines/preprocessing_brain_extraction.yaml
+scripts/view_check_T1_brain_extraction.sh
+
+scripts/run_pipeline.sh --pipeline pipelines/preprocessing_registration.yaml
+scripts/run_check_DWI_to_MNI.sh
+scripts/view_check_DWI_to_MNI.sh
+
+scripts/run_pipeline.sh --pipeline pipelines/preprocessing_fsl.yaml
+scripts/run_pipeline.sh --pipeline pipelines/tracts/anterior_thalamic_radiation.yaml
+```
+
+## Pipeline
+
+![Diagram](https://github.com/user-attachments/files/29499889/diagram.pdf)
+
+
 ## Folder layout
 
 ```text
