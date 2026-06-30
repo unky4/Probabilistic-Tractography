@@ -1,4 +1,4 @@
-# Probabilistic Tractography Pipeline — Version 1
+# Probabilistic Tractography Pipeline
 
 This project provides a BIDS-based probabilistic tractography workflow using reusable shell/Python scripts and small YAML pipeline files. The repository is organised so preprocessing can be run once, quality-controlled in stages, and tract-specific analyses can be run independently afterwards.
 
@@ -20,6 +20,16 @@ scripts/run_pipeline.sh --pipeline pipelines/tracts/anterior_thalamic_radiation.
 ## Pipeline
 
 <img width="3866" height="1964" alt="diagram" src="https://github.com/user-attachments/assets/108dbe44-2cde-4d6d-8090-bd496f897ec0" />
+
+## Pipeline features
+
+- BIDS-style input organisation
+- Config-driven execution
+- Diffusion MRI preprocessing
+- Probabilistic tractography using FSL
+- Integration with anatomical masks/ROIs
+- Quality-control checks
+- Generalised scripts for reuse across studies
 
 ## Folder layout
 
@@ -273,9 +283,11 @@ group_level:
 
 The runner also accepts the readable alias `--threshold 0.0001` and converts it to FSL's `-thr 0.0001` before running `fslmaths`.
 
-## Note
+## Notes
 
 This is a cleaned/generalised research pipeline.
+
+This repository contains a generalised version of the diffusion MRI probabilistic tractography pipeline used in research analyses. It is intended for reproducible neuroimaging workflows and does not include participant data.
 
 ## License
 
