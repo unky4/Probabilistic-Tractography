@@ -273,6 +273,10 @@ group_level:
 
 The runner also accepts the readable alias `--threshold 0.0001` and converts it to FSL's `-thr 0.0001` before running `fslmaths`.
 
+## Note
+
+This is a cleaned/generalised research pipeline.
+
 ## License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
