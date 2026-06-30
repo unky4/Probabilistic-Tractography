@@ -19,7 +19,8 @@ scripts/run_pipeline.sh --pipeline pipelines/tracts/anterior_thalamic_radiation.
 
 ## Pipeline
 
-![Diagram](https://github.com/user-attachments/files/29499889/diagram.pdf)
+<img width="4795" height="2692" alt="diagram" src="https://github.com/user-attachments/assets/f22d6749-360e-4c94-9d15-f32add36cc45" />
+
 
 
 ## Folder layout
