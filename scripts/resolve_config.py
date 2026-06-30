@@ -17,7 +17,7 @@ import yaml
 
 
 COMMON_INSTALLS = {
-    "software.fsldir": ["/usr/local/fsl", "/opt/fsl", "/home/szabolcs/fsl"],
+    "software.fsldir": ["/usr/local/fsl", "/opt/fsl"],
     "software.freesurfer_home": ["/usr/local/freesurfer", "/opt/freesurfer"],
     "software.brainsuite_dir": ["/usr/local/BrainSuite", "/opt/BrainSuite", "/opt/brainsuite"],
     "software.ants_dir": ["/usr/local/ants", "/opt/ants", "/usr/local/ANTs", "/opt/ANTs"],
