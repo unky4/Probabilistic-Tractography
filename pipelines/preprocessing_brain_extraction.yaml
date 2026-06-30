@@ -1,0 +1,7 @@
+# Run after preprocessing_T1.
+# This stage must be visually checked before registration and FSL preprocessing.
+name: preprocessing_brain_extraction
+kind: preprocessing
+steps:
+  - t1_brain_extraction
+  - view_check_t1_brain_extraction

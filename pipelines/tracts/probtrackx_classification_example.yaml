@@ -1,0 +1,60 @@
+# Example showing classification-style probtrackx arguments.
+#
+# targetmasks is available, but it is not forced. Use it only when you want
+# ProbtrackX classification targets. For a tract endpoint/termination mask,
+# use stop instead.
+name: probtrackx_classification_example
+description: Example showing targetmasks, target2, target3, target4, colmask4, stop, avoid, and wtstop.
+
+steps:
+  - roi_generation
+  - probtrackx
+  - warp_to_mni
+  - group_level
+
+rois:
+  freesurfer: []
+
+  mni:
+    - name: Seed
+      path: data/rois_mni/Seed.nii.gz
+    - name: TargetClass1
+      path: data/rois_mni/TargetClass1.nii.gz
+    - name: TargetClass2
+      path: data/rois_mni/TargetClass2.nii.gz
+    - name: TargetClass3
+      path: data/rois_mni/TargetClass3.nii.gz
+    - name: TargetClass4
+      path: data/rois_mni/TargetClass4.nii.gz
+    - name: ColumnMask4
+      path: data/rois_mni/ColumnMask4.nii.gz
+    - name: StopMask
+      path: data/rois_mni/StopMask.nii.gz
+    - name: AvoidMask
+      path: data/rois_mni/AvoidMask.nii.gz
+    - name: WtStopMask
+      path: data/rois_mni/WtStopMask.nii.gz
+
+probtrackx:
+  analyses:
+    - name: Classification_example
+      seed: Seed
+      targetmasks:
+        - TargetClass1
+      target2: TargetClass2
+      target3: TargetClass3
+      colmask4: ColumnMask4
+      target4: TargetClass4
+      stop: StopMask
+      avoid: AvoidMask
+      wtstop: WtStopMask
+      other_args:
+        - --loopcheck
+        - --nsamples=5000
+
+mni_probability_maps:
+  normalise_by_waytotal: true
+  threshold: 0.0001
+
+group_level:
+  analyses: [regression]

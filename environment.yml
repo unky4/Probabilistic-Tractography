@@ -1,0 +1,10 @@
+name: probabilistic-tractography
+channels: [conda-forge]
+dependencies:
+  - python>=3.10
+  - pyyaml
+  - numpy
+  - pandas
+  - scipy
+  - statsmodels
+  - nibabel

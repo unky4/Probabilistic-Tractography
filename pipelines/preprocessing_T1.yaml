@@ -1,0 +1,7 @@
+# Run first. Performs structural preprocessing only.
+# Outputs are reused by later preprocessing and tract-specific pipelines.
+name: preprocessing_T1
+kind: preprocessing
+steps:
+  - freesurfer_recon_all
+  - brainsuite_preprocessing

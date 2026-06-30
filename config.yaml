@@ -1,0 +1,42 @@
+# Global settings only: stable paths, software locations, and preprocessing options.
+# Tract-specific ROIs, label indices, probtrackx connections, and group models
+# belong in files under pipelines/tracts/.
+#
+# Software path values can be absolute paths or "auto".
+# When set to "auto", scripts resolve the path from environment variables,
+# installed command locations, or common installation folders.
+project:
+  bids_dir: data/images
+  results_dir: results
+  clinical_scores: data/clinical_scores.csv
+
+subjects:
+  include: []   # Empty means all sub-* folders in data/images.
+  exclude: []
+
+software:
+  fsldir: auto
+  freesurfer_home: auto
+  brainsuite_dir: auto
+  ants_dir: auto
+  mni_template: auto
+
+resources:
+  jobs: 100%
+
+preprocessing:
+  freesurfer:
+    recon_all_options: -all
+
+  brainsuite:
+    bse_options: ""
+    bfc_options: ""
+    bdp_options: ""
+
+  ants:
+    itk_threads_per_subject: 1
+    nki_template: auto
+    nki_mask: auto
+
+bedpostx:
+  options: ""

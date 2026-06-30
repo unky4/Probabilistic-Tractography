@@ -1,0 +1,8 @@
+# Run after brain extraction has been checked.
+# This stage creates registration transforms and opens the DWI-to-MNI QC image.
+name: preprocessing_registration
+kind: preprocessing
+steps:
+  - dwi_registration
+  - run_check_dwi_to_mni
+  - view_check_dwi_to_mni

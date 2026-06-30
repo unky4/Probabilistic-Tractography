@@ -1,0 +1,39 @@
+# Tract-specific pipeline example using FreeSurfer amygdala ROIs.
+name: amygdala_example
+description: Example tract pipeline using amygdala masks without extra FreeSurfer preprocessing.
+
+steps:
+  - roi_generation
+  - probtrackx
+  - warp_to_mni
+  - group_level
+
+rois:
+  freesurfer:
+    - name: Amygdala
+      source: mri/aseg.mgz
+      left_indices: [18]
+      right_indices: [54]
+
+  mni: []
+
+probtrackx:
+  analyses:
+    - name: Amygdala_Left_example
+      seed: Amygdala_Left
+      other_args:
+        - --loopcheck
+        - --nsamples=5000
+
+    - name: Amygdala_Right_example
+      seed: Amygdala_Right
+      other_args:
+        - --loopcheck
+        - --nsamples=5000
+
+mni_probability_maps:
+  normalise_by_waytotal: true
+  threshold: 0.0001
+
+group_level:
+  analyses: [regression]

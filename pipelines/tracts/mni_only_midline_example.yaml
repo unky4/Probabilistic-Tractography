@@ -1,0 +1,52 @@
+# Tract-specific pipeline example where every ROI is drawn in MNI space.
+#
+# These MNI-space masks are converted to each subject's DWI space during the
+# roi_generation step. The ROI names below are exact names. There is no required
+# hemisphere field. A midline ROI can simply have one name, such as MidlineSeed.
+name: mni_only_midline_example
+description: Example using only hand-drawn MNI ROIs, including a non-hemispheric midline ROI.
+
+steps:
+  - roi_generation
+  - probtrackx
+  - warp_to_mni
+  - group_level
+
+rois:
+  freesurfer: []
+
+  mni:
+    - name: MidlineSeed
+      path: data/rois_mni/MidlineSeed.nii.gz
+
+    - name: AnteriorWaypoint
+      path: data/rois_mni/AnteriorWaypoint.nii.gz
+
+    - name: PosteriorStop
+      path: data/rois_mni/PosteriorStop.nii.gz
+
+    - name: ExclusionMask
+      path: data/rois_mni/ExclusionMask.nii.gz
+
+probtrackx:
+  analyses:
+    - name: MidlineSeed_to_PosteriorStop
+      seed: MidlineSeed
+      waypoints:
+        - AnteriorWaypoint
+      avoid: ExclusionMask
+      stop: PosteriorStop
+      other_args:
+        - --onewaycondition
+        - --loopcheck
+        - --nsamples=5000
+        - --steplength=0.5
+        - --distthresh=0.0
+        - --sampvox=0.0
+
+mni_probability_maps:
+  normalise_by_waytotal: true
+  threshold: 0.0001
+
+group_level:
+  analyses: [regression]

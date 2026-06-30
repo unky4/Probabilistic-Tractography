@@ -1,0 +1,39 @@
+# Tract-specific pipeline example: single FreeSurfer ROI without hemisphere suffix.
+#
+# Use this pattern when an ROI is located in the midline or should be treated as one
+# bilateral/non-lateralised mask rather than separate left/right masks.
+
+name: freesurfer_midline_roi_example
+description: Example showing a single FreeSurfer ROI generated without Left/Right suffixes.
+
+steps:
+  - roi_generation
+  - probtrackx
+  - warp_to_mni
+  - group_level
+
+rois:
+  freesurfer:
+    - name: MidlineROI
+      source: mri/aparc+aseg.mgz
+      indices: [10, 11, 12]
+
+  mni: []
+
+probtrackx:
+  analyses:
+    - name: MidlineROI_example
+      seed: MidlineROI
+      other_args:
+        - --loopcheck
+        - --nsamples=5000
+
+mni_probability_maps:
+  normalise_by_waytotal: true
+  threshold: 0.0001
+
+group_level:
+  analyses: [regression]
+  regression:
+    mask_options: -thr 0.0001
+    randomise_options: -D -n 5000 -v 10

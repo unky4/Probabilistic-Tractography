@@ -1,0 +1,6 @@
+# Run after DWI-to-MNI registration has been checked.
+# This stage prepares FSL bedpostx outputs for tractography.
+name: preprocessing_fsl
+kind: preprocessing
+steps:
+  - bedpostx

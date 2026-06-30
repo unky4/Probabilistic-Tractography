@@ -1,0 +1,65 @@
+# Tract-specific pipeline: anterior thalamic radiation example.
+#
+# The global config.yaml contains only shared project/preprocessing settings.
+# This tract YAML contains analysis-specific ROI and probtrackx choices.
+name: anterior_thalamic_radiation
+description: Mediodorsal thalamus to frontal pole probabilistic tractography.
+
+steps:
+  - freesurfer_extra
+  - roi_generation
+  - probtrackx
+  - warp_to_mni
+  - group_level
+
+freesurfer_extra:
+  - aparc2aseg
+  - segment_thalamic_nuclei
+
+rois:
+  freesurfer:
+    - name: FrontalPole
+      source: aparc.cortical.mgz
+      left_indices: [1032]
+      right_indices: [2032]
+
+    - name: MediodorsalThalamus
+      source: mri/ThalamicNuclei.v13.T1.FSvoxelSpace.mgz
+      left_indices: [8112, 8113]
+      right_indices: [8212, 8213]
+
+  mni: []
+
+probtrackx:
+  analyses:
+    - name: MediodorsalThalamus_to_FrontalPole_Left
+      seed: MediodorsalThalamus_Left
+      stop: FrontalPole_Left
+      other_args:
+        - --onewaycondition
+        - --loopcheck
+        - --nsamples=5000
+        - --steplength=0.5
+        - --distthresh=0.0
+        - --sampvox=0.0
+
+    - name: MediodorsalThalamus_to_FrontalPole_Right
+      seed: MediodorsalThalamus_Right
+      stop: FrontalPole_Right
+      other_args:
+        - --onewaycondition
+        - --loopcheck
+        - --nsamples=5000
+        - --steplength=0.5
+        - --distthresh=0.0
+        - --sampvox=0.0
+
+mni_probability_maps:
+  normalise_by_waytotal: true
+  threshold: 0.0001
+
+group_level:
+  analyses: [regression]
+  regression:
+    mask_options: -thr 0.0001
+    randomise_options: -D -n 5000 -v 10
